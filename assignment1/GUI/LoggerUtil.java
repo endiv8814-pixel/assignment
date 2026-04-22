@@ -39,5 +39,5 @@ public class LoggerUtil { // utility class for logging operations to greenprint_
     // logs when state is loaded
     public static void logStateLoaded(int count){log("STATE_LOADED", "total=" + count);}
 
-
+    public static void logDiscountAppliet(String res){log("DISCOUNT_APPLIED", res);}
 }
