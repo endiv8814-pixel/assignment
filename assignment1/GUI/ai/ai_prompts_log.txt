@@ -1,0 +1,70 @@
+ AI Prompts Log Part B (GreenPrint GUI Rebuild)
+Tool used: Claude 
+
+
+
+Attempt 1 — Dashboard Tab
+
+Prompt sent:
+I have a JavaFX project called GreenPrint. I need you to generate a Dashboard tab class called DashboardAI in package assignment1.GUI.ai. It extends Tab. Requirements:
+- Show each EmissionSource as a colored Label inside a FlowPane: green if emission < 1.0 kg, yellow if 1.0-3.0 kg, red if > 3.0 kg
+- Each label shows the sourceID as text
+- When user clicks a label, show full details in a TextArea below
+- At the top show a summary: total entries, total CO2, user with highest footprint
+- Use FootprintTracker from package assignment1
+- Package is assignment1.GUI.ai
+
+AI Response:
+The AI generated a DashboardAI class with FlowPane for colored labels and a TextArea for details. The summary label was included at the top. Click handlers were implemented using setOnMouseClicked.
+
+Changes made to AI output:
+The top user calculation was missing — added manually using `getTotalEmissionsForUser()`.
+
+
+Attempt 2 — Refinement of Dashboard
+
+Prompt sent:
+The dashboard does not show the name of the user with the highest footprint in the summary bar. Can you add that? Loop through all unique user names, call getTotalEmissionsForUser() for each, and display the one with the highest value.
+
+AI Response :
+AI correctly added the top user calculation using a loop and ArrayList to track seen users. The logic was correct.
+
+
+Attempt 3 — Input Tab
+
+Prompt sent:
+Generate a JavaFX Tab class called InputTabAI in package assignment1.GUI.ai. Requirements:
+TextField for Source ID with real-time validation using ChangeListener — show green " Valid" or red " Invalid" label next to it. Pattern is [A-Z]-\d{3}
+ ComboBox for type: Transportation, Energy, Food
+ When type changes, show different input fields below (dynamic fields)
+ Transportation: TextField for distance, ComboBox for mode (Car, Bus, Train, Bicycle)
+ Energy: TextField for kWh, ComboBox for source (Grid, Solar, Wind)
+ Food: ComboBox for meal type (Vegan, Vegetarian, Poultry, Beef), TextField for number of meals
+TextField for user name and date
+ Add Entry button: validate inputs, create correct subclass, add to FootprintTracker, call LoggerUtil.logEntryAdded()
+ Search by user: TextField + Button, show results in ListView
+ Package assignment1.GUI.ai, imports from assignment1
+
+ Response:
+The AI generated a complete InputTabAI with all required fields. Dynamic fields switching worked correctly using setOnAction on the type ComboBox. Validation with ChangeListener was present.
+
+
+
+
+Attempt 4 — Offset Transaction Tab
+
+Prompt sent:
+ Generate a JavaFX Tab class called OffsetTabAI in package assignment1.GUI.ai. Requirements:
+ Show total emissions at top from FootprintTracker.getTotalEmissions()
+ TextField for kg of CO2 to offset
+ ComboBox for payment: Credit Card, Digital Wallet, Campus Card
+ Purchase button with 2 second delay using PauseTransition (NOT Thread.sleep)
+After delay: show receipt in TextArea using TransactionHandler.makeReceipt(), add to ListView history using TransactionHandler.makeHistoryLine(), call LoggerUtil.logOffsetPurchased()
+ Use GridPane for input layout
+ Package assignment1.GUI.ai
+
+AI Response:
+The AI generated a working OffsetTabAI. PauseTransition was used correctly. GridPane layout for inputs was clean. Receipt and history were displayed properly.
+
+
+
