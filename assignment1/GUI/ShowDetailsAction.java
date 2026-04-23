@@ -11,6 +11,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class ShowDetailsAction implements EventHandler<ActionEvent> {
     private GridPane grid;
@@ -22,9 +23,9 @@ public class ShowDetailsAction implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent arg0) {
 
-        Label title = makeLabel(Color.WHITE, Color.BLACK);
+        Label title = makeLabel(Color.rgb(2, 8, 2), Color.rgb(57, 255, 20));
         title.setText("Details for Entry: " + source.getSourceID());
-        Label details = makeLabel(Color.WHITE, Color.BLACK);
+        Label details = makeLabel(Color.rgb(2, 8, 2), Color.rgb(57, 255, 20));
         details.setText(source.toString());
 
         grid.getChildren().clear();
@@ -40,7 +41,7 @@ public class ShowDetailsAction implements EventHandler<ActionEvent> {
 
         lab.setBackground(bg);
         lab.setTextFill(textColor);
-        lab.setFont(Font.font("Arial", 20));
+        lab.setFont(Font.font("Courier New",FontWeight.BOLD, 20));
         return lab;
     }
 }
