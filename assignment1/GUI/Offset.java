@@ -4,12 +4,16 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.HashMap;
 
+import TCP.ConnectionConfig;
+import TCP.ResponseParser;
 import assignment1.FootprintTracker;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -21,12 +25,25 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 
 public class Offset extends Tab{ // tab that allows users to purchase carbon offsets and view transaction history
+
+    private static final Color BG = Color.rgb(2,   8,  2);
+    private static final Color HEADER_BG = Color.rgb(2,  18,  2);
+    private static final Color CARD_BG = Color.rgb(8,  22,  8);
+    private static final Color CARD_BG_RED = Color.rgb(28,  4,  4);
+    private static final Color BRIGHT_GREEN = Color.rgb(57, 255, 20);
+    private static final Color DIM_GREEN = Color.rgb(35, 110, 35);
+    private static final Color BORDER_GREEN = Color.rgb(20,  70, 20);
+    private static final Color RED = Color.rgb(220,  20, 60);
+    private static final Color YELLOW = Color.rgb(200, 180,  0);
+
 
     private ObservableList<String> ol = FXCollections.observableArrayList(); // list of past transactions shown in history view
     private Label totalEm; // label displaying current total emissions, updated reactively
@@ -45,10 +62,26 @@ public class Offset extends Tab{ // tab that allows users to purchase carbon off
     // builds and renders the offset purchase UI
     // tracker: shared footprint tracker instance
     public void showdata(FootprintTracker tracker){
-        VBox vbox = new VBox(10);
+
         FlowPane flowPane = new FlowPane(10,10);
-        totalEm = makLabel(null, Color.BLACK);
-        totalEm.setText("Total Emissions: " + tracker.getTotalEmissions());
+        VBox root = new VBox(24);
+
+        root.setPadding(new Insets(40, 60, 40, 60));
+
+        root.setAlignment(Pos.CENTER);
+
+        root.setBackground(new Background(new BackgroundFill(BG, CornerRadii.EMPTY, Insets.EMPTY)));
+        HBox h = new HBox(12);
+        
+        h.setAlignment(Pos.CENTER);
+
+        totalEm = new Label(String.valueOf(tracker.getTotalEmissions())+ " KG_CO2");
+
+        totalEm.setFont(Font.font("Courier New", FontWeight.BOLD, 72));
+        totalEm.setTextFill(BRIGHT_GREEN);
+
+        h.getChildren().add(totalEm);
+    
         TextField TF = new TextField();
         TF.setPromptText("kg of CO2 to offset");
         ComboBox<String> cb = new ComboBox<>();
@@ -86,8 +119,8 @@ public class Offset extends Tab{ // tab that allows users to purchase carbon off
 
                 @Override
                 protected String call() throws Exception {
-                    
-                    try (Socket socket = new Socket("localhost", 228)){
+                    ConnectionConfig config = new ConnectionConfig("localhost", 228);
+                    try (Socket socket = new Socket(config.getHost(), config.getPort())){
 
                         socket.setSoTimeout(5000);
                         PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
@@ -133,41 +166,21 @@ public class Offset extends Tab{ // tab that allows users to purchase carbon off
 
         });
         purchase.setOnAction(new PurchaseHandler(TF, cb, ta, purchase, ol));
-        vbox.getChildren().addAll(totalEm, TF, cb, purchase, requestDiscount, discountLabel, ta, history);
-        flowPane.getChildren().add(vbox);
+        root.getChildren().addAll(h, TF, cb, purchase, requestDiscount, discountLabel, ta, history);
+        flowPane.getChildren().add(root );
         setContent(flowPane);
     }
 
     private void displayDiscount(String res) {
+        try {
+            HashMap<Integer, String> map = ResponseParser.parse(res);
 
-        try{
-        if (res==null || !res.startsWith("DISCOUNT:")){
+            discountLabel.setTextFill(Color.GREEN);
+            discountLabel.setText("Discount applied: " + map.get(1) + "% - Your footprint is " + map.get(2) + "kg CO2");
 
-            throw new Exception("Empty response");
-        }
+            LoggerUtil.logDiscountAppliet(res);
 
-        String[] blocks = res.split(":");
-
-        if (blocks.length != 3) throw new Exception("Invalid format");
-
-        String p = blocks[1];
-
-        String v = blocks[2];
-
-
-        discountLabel.setTextFill(Color.GREEN);
-
-        discountLabel.setText("Discount applied: " + p + "% - Your footprint is " + v + "kg CO2");
-        
-
-        LoggerUtil.logDiscountAppliet(res);
-
-        
-    
-        }
-
-        catch (Exception e){
-
+        } catch (Exception e) {
             discountLabel.setText("Something went wrong. Try again");
         }
     }

@@ -8,3 +8,4 @@ Food|F-001|Food|2026-03-03|Alice|Beef|10.0
 Food|F-001|Food|2026-03-07|Alice|Poultry|100.0
 Food|F-003|Food|2026-03-10|Alice|Vegan|1000.0
 Food|F-004|Food|2026-03-10|Alice|Vegan|1000.0
+Transportation|V-001|Transportation|2026-04-16|Victoria|1.0|Bus

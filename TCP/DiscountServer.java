@@ -13,10 +13,11 @@ public class DiscountServer {
     private static final int PORT = 228;
 
     public static void main(String[] args) throws IOException {
-        
-        try (ServerSocket socket = new ServerSocket(PORT)){
 
-            System.out.println("[SERVER] Listening on port: " + PORT);
+        
+        try (ServerSocket socket = new ServerSocket(ConnectionConfig.D_POST)){
+
+            System.out.println("[SERVER] Listening on port: " + ConnectionConfig.D_POST);
             while (true){
 
                 try (Socket client = socket.accept()){
@@ -57,7 +58,7 @@ public class DiscountServer {
 
             int discount = random.nextInt(31);
 
-            double discountedEmission = titalEmission * (1.0 - (discount / 100.0));
+            double discountedEmission = DiscountCalculator.calculateDiscount(titalEmission, discount);
 
             String response = String.format("DISCOUNT:%d:%.2f", discount, discountedEmission);
 
