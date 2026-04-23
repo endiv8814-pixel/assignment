@@ -31,12 +31,12 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application {
 
-    static final Color BG            = Color.rgb(2,  8,  2);
-    static final Color HEADER_BG     = Color.rgb(2, 18,  2);
-    static final Color BRIGHT_GREEN  = Color.rgb(57, 255, 20);
-    static final Color DIM_GREEN     = Color.rgb(30, 100, 30);
-    static final Color BORDER_GREEN  = Color.rgb(20,  70, 20);
-    static final Color LINE_COLOR    = Color.rgb(0, 0, 0, 0.18);
+    static final Color BG = Color.rgb(2,  8,  2);
+    static final Color HEADER_BG = Color.rgb(2, 18,  2);
+    static final Color BRIGHT_GREEN = Color.rgb(57, 255, 20);
+    static final Color DIM_GREEN = Color.rgb(30, 100, 30);
+    static final Color BORDER_GREEN = Color.rgb(20,  70, 20);
+    static final Color LINE_COLOR = Color.rgb(0, 0, 0, 0.18);
 
     private final FootprintTracker tracker = new FootprintTracker("Lalala");
 
