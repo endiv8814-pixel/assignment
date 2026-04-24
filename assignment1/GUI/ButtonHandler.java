@@ -58,7 +58,8 @@ public class ButtonHandler implements EventHandler<ActionEvent>{
             boolean Combo_Check = comboBox2.getValue() != null;
             boolean user_name = Validator(TF2.getText(), "^[A-Za-z]+$");
             boolean date = datePicker.getValue() != null;
-            if (SourceID && SourceIDRepeater && TFT_Check && Combo_Check && user_name && date){
+            boolean before_date = datePicker.getValue().isBefore(java.time.LocalDate.now());
+            if (SourceID && SourceIDRepeater && TFT_Check && Combo_Check && user_name && date && before_date){
                 ReadyOrNot.setText("Submitted");
                 if(comboBox.getValue().equals("Transportation")){
                     TransportationEmission TE = new TransportationEmission(TF.getText(), comboBox.getValue(), datePicker.getValue().toString(), TF2.getText(), Double.parseDouble(TFT.getText()), comboBox2.getValue());
@@ -76,8 +77,26 @@ public class ButtonHandler implements EventHandler<ActionEvent>{
                     LoggerUtil.logEntryAdded(TF.getText(), TF2.getText(), FE.calculateEmission());
                 }
             }
-            else{
-                ReadyOrNot.setText("Something isn't right!");
+            else if(!SourceID){
+                ReadyOrNot.setText("The ID is not valid!");
+            }
+            else if(!SourceIDRepeater){
+                ReadyOrNot.setText("The ID is already in use!");
+            }
+            else if(!TFT_Check){
+                ReadyOrNot.setText("The quantity is not valid!");
+            }
+            else if(!Combo_Check){
+                ReadyOrNot.setText("Please select a category!");
+            }
+            else if(!user_name){
+                ReadyOrNot.setText("The user name is not valid!");
+            }
+            else if(!date){
+                ReadyOrNot.setText("Please select a date!");
+            }
+            else if(!before_date){
+                ReadyOrNot.setText("Please select a date in the past!");
             }
         }
     }
