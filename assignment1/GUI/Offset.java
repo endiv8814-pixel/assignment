@@ -129,7 +129,7 @@ public class Offset extends Tab{ // tab that allows users to purchase carbon off
             new Thread(discount).start();
         });
 
-        purchase.setOnAction(new PurchaseHandler(TF, cb, ta, purchase, ol, this, tracker));
+        purchase.setOnAction(new PurchaseHandler(TF, cb, ta, purchase,ol, this, tracker));
 
         HBox buttons = new HBox(12, purchase, requestDiscount);
         buttons.setAlignment(Pos.CENTER);
