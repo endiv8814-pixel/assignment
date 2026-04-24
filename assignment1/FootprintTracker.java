@@ -23,11 +23,10 @@ public class FootprintTracker {
 
         double sum = 0.0;
         for (EmissionSource source : entries){
-
-
             sum += source.calculateEmission();
         }
-
+        sum -= assignment1.GUI.PurchaseHandler.getOffsetAmount();
+        System.out.println("Total emissions after offset: " + sum + " kg CO2");
         return sum;
     }
 

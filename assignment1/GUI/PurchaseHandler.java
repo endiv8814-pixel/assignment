@@ -1,4 +1,5 @@
 package assignment1.GUI;
+import assignment1.FootprintTracker;
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,12 +18,17 @@ public class PurchaseHandler implements EventHandler<ActionEvent> {
     private TextArea ta;
     private Button purchase;
     private ObservableList<String> ol;
-    public PurchaseHandler(TextField TF, ComboBox<String> cb, TextArea ta, Button purchase, ObservableList<String> ol){
+    private Offset offset;
+    private FootprintTracker tracker;
+    private static double offsetAmount = 0.0;
+    public PurchaseHandler(TextField TF, ComboBox<String> cb, TextArea ta, Button purchase, ObservableList<String> ol, Offset offset, FootprintTracker tracker){
         this.TF = TF;
         this.cb = cb;
         this.ta = ta;
         this.purchase = purchase;
         this.ol = ol;
+        this.offset = offset;
+        this.tracker = tracker;
     }
     public void handle(ActionEvent arg0){
         action();
@@ -40,6 +46,7 @@ public class PurchaseHandler implements EventHandler<ActionEvent> {
             pause.setOnFinished(new EventHandler<ActionEvent>() {
                 public void handle(ActionEvent event){
                     try{
+                    offsetAmount += Double.parseDouble(TF.getText());
                     double cost = (Double.parseDouble(TF.getText())/1000)*15;
                     Alert alert = new Alert(AlertType.INFORMATION);
                     alert.setTitle("Payment confirmation");
@@ -49,12 +56,14 @@ public class PurchaseHandler implements EventHandler<ActionEvent> {
                     String transaction =TransactionHandler.makeReceipt(Double.parseDouble(TF.getText()), String.valueOf(cost));
                     String historyLine = TransactionHandler.makeHistoryLine(Double.parseDouble(TF.getText()), String.valueOf(cost));
                     ta.appendText(transaction);
+                    ol.remove("NO_TRANSACTIONS_FOUND");
                     ol.add(historyLine);
                     LoggerUtil.logOffsetPurchased(Double.parseDouble(TF.getText()), cb.getValue());
                     System.out.println(ol);
                     TF.clear();
                     cb.setValue(null);
                     purchase.setDisable(false);
+                    offset.updateTotalEmissions(tracker);
                     }
                     catch(Exception ex){
                         ex.printStackTrace();
@@ -64,5 +73,9 @@ public class PurchaseHandler implements EventHandler<ActionEvent> {
             });
             pause.play();
         }
+
+    public static double getOffsetAmount() {
+        return offsetAmount;
+    }
 
 }
