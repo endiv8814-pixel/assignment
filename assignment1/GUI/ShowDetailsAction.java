@@ -23,9 +23,9 @@ public class ShowDetailsAction implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent arg0) {
 
-        Label title = makeLabel(Color.rgb(2, 8, 2), Color.rgb(57, 255, 20));
+        Label title = makeLabel(Color.rgb(2, 8, 2), Color.rgb(65, 240, 105));
         title.setText("Details for Entry: " + source.getSourceID());
-        Label details = makeLabel(Color.rgb(2, 8, 2), Color.rgb(57, 255, 20));
+        Label details = makeLabel(Color.rgb(2, 8, 2), Color.rgb(65, 240, 105));
         details.setText(source.toString());
 
         grid.getChildren().clear();

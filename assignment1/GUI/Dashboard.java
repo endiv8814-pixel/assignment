@@ -28,15 +28,15 @@ import javafx.scene.text.FontWeight;
 
 public class Dashboard extends Tab {
 
-    private static final Color BG = Color.rgb(2,   8,  2);
-    private static final Color HEADER_BG = Color.rgb(2,  18,  2);
-    private static final Color CARD_BG = Color.rgb(8,  22,  8);
-    private static final Color CARD_BG_RED = Color.rgb(28,  4,  4);
-    private static final Color BRIGHT_GREEN = Color.rgb(57, 255, 20);
-    private static final Color DIM_GREEN = Color.rgb(35, 110, 35);
-    private static final Color BORDER_GREEN = Color.rgb(20,  70, 20);
-    private static final Color RED = Color.rgb(220,  20, 60);
-    private static final Color YELLOW = Color.rgb(200, 180,  0);
+    private static final Color BG = Color.rgb(2, 6, 4); 
+    private static final Color HEADER_BG = Color.rgb(5, 15, 10);  
+    private static final Color CARD_BG = Color.rgb(4, 12, 8);    
+    private static final Color CARD_BG_RED = Color.rgb(24, 4, 4); 
+    private static final Color BRIGHT_GREEN = Color.rgb(65, 240, 105); 
+    private static final Color DIM_GREEN = Color.rgb(45, 140, 85);  
+    private static final Color BORDER_GREEN = Color.rgb(30, 80, 50); 
+    private static final Color RED = Color.rgb(235, 65, 80); 
+    private static final Color YELLOW = Color.rgb(190, 190, 50); 
 
     public Dashboard(FootprintTracker tracker) {
         setText("Dashboard");
