@@ -1,6 +1,8 @@
 package TCP;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class TestDiscountCalculator {
     @Test
@@ -20,4 +22,14 @@ public class TestDiscountCalculator {
         result = (int) DiscountCalculator.calculateDiscount(200.0, -10);
         assertEquals(200, result, "Negative discount should return the original price.");
     }
+    @ParameterizedTest
+    @CsvSource({
+    "100, 100",
+    "200, 140",
+    "200, 0"
+    })`
+    void testCalculateDiscount(double initial, int expected) {
+    assertEquals(expected, (int) DiscountCalculator.calculateDiscount());
+    }*/
+
 }
