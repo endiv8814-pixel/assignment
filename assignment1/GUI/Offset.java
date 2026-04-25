@@ -103,8 +103,7 @@ public class Offset extends Tab{ // tab that allows users to purchase carbon off
             Task<String> discount = new Task<>() {
                 @Override
                 protected String call() throws Exception {
-                    ConnectionConfig config = new ConnectionConfig("localhost", 228);
-                    try (Socket socket = new Socket(config.getHost(), config.getPort())) {
+                    try (Socket socket = new Socket(ConnectionConfig.D_HOST, ConnectionConfig.D_POST)) {
                         socket.setSoTimeout(5000);
                         PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
                         BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -196,7 +195,7 @@ public class Offset extends Tab{ // tab that allows users to purchase carbon off
     }
 
     public Button makeRButton(FootprintTracker tracker){
-        Button lab = new Button(">> EQUEST_DISCOUNT");
+        Button lab = new Button(">> REQUEST_DISCOUNT");
         lab.setFont(Font.font("Courier New", FontWeight.BOLD, 15));
         lab.setTextFill(BLUE_BORDER);
         lab.setPadding(new Insets(16, 20, 16, 20));

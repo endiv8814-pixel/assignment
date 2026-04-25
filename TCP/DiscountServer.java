@@ -52,19 +52,22 @@ public class DiscountServer {
         
             }
 
-            double titalEmission = Double.parseDouble(recieved.trim());
+            double totalEmission = Double.parseDouble(recieved.trim());
 
-            System.out.println("[SERVER] Recieved total emission: " + titalEmission);
+            System.out.println("[SERVER] Client connected (" + socket.getInetAddress().getHostAddress() + ")");
+            System.out.println("[SERVER] Received: " + totalEmission);
 
-            int discount = random.nextInt(31);
+            int discount = random.nextInt(30)+1;
+            System.out.println("[SERVER] Applying Discount: " + discount + "%");
 
-            double discountedEmission = DiscountCalculator.calculateDiscount(titalEmission, discount);
+            double discountedEmission = DiscountCalculator.calculateDiscount(totalEmission, discount);
 
             String response = String.format("DISCOUNT:%d:%.2f", discount, discountedEmission);
 
             output.println(response);
 
-            System.out.printf("[SERVER] Client connected | Sent: %.2f | Discount: %d%% | Result: %.2f%n", titalEmission, discount, discountedEmission);
+            System.out.println("[SERVER] Result Sent: " + discountedEmission);
+            System.out.println("[SERVER] Connection closed.");
          
         } catch (IOException e) {
 
