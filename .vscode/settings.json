@@ -11,6 +11,7 @@
         "/Users/endiv/Documents/javafx-sdk-25.0.22/lib/javafx.web.jar",
         "/Users/endiv/Documents/javafx-sdk-25.0.22/lib/jdk.jsobject.jar",
         "/Users/endiv/Documents/javafx-sdk-25.0.22/lib/jfx.incubator.input.jar",
-        "/Users/endiv/Documents/javafx-sdk-25.0.22/lib/jfx.incubator.richtext.jar"
+        "/Users/endiv/Documents/javafx-sdk-25.0.22/lib/jfx.incubator.richtext.jar",
+        "/Users/endiv/Downloads/junit-platform-console-standalone-1.10.1.jar"
     ]
 }

@@ -35,7 +35,18 @@ public class PurchaseHandler implements EventHandler<ActionEvent> {
     }
 
     public void action(){
-            if (TF.getText().isEmpty() || cb.getValue() == null) { // ignore if input is incomplete
+
+            String s = TF.getText();
+
+            if (TF.getText().isEmpty() || cb.getValue() == null || Double.parseDouble(s) <= 0) { // ignore if input is incomplete
+                ta.setText(">> INPUT_IS_INCOMPLETE");
+                return;
+            }
+
+            if ((tracker.getTotalEmissions() - Double.parseDouble(s))< 0){
+
+                ta.setText(">> INVALID_AMOUNT");
+
                 return;
             }
             ta.clear();

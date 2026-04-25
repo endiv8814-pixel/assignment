@@ -40,10 +40,10 @@ public class InputTab extends Tab{//Tab that takes user input and creates an emi
     //Takes FootprintTracker as an argument.
     //Does not return anything.
     private static final Color BG = Color.rgb(2, 6, 4);
-private static final Color CARD_BG = Color.rgb(6, 15, 10); 
-private static final Color BRIGHT_GREEN = Color.rgb(65, 240, 105); 
-private static final Color DIM_GREEN = Color.rgb(45, 120, 80);
-private static final Color BORDER_GREEN = Color.rgb(30, 80, 50);
+    private static final Color CARD_BG = Color.rgb(6, 15, 10); 
+    private static final Color BRIGHT_GREEN = Color.rgb(65, 240, 105); 
+    private static final Color DIM_GREEN = Color.rgb(45, 120, 80);
+    private static final Color BORDER_GREEN = Color.rgb(30, 80, 50);
 
     public InputTab(FootprintTracker tracker){
 
@@ -71,9 +71,9 @@ private static final Color BORDER_GREEN = Color.rgb(30, 80, 50);
         grid.setMaxWidth(Double.MAX_VALUE);
 
 
-        TextField TF = makeTextField(">>ENTER_SOURCE_ID");
+        TextField TF = makeTextField(">> ENTER_SOURCE_ID");
 
-        TextField  TFU = makeTextField(">>ENTER_USER");
+        TextField  TFU = makeTextField(">> ENTER_USER");
 
         DatePicker datePicker = new DatePicker();
 
@@ -164,6 +164,7 @@ private static final Color BORDER_GREEN = Color.rgb(30, 80, 50);
 
         setContent(scroll);
     }
+    
     //Utility class for validating if a string has certain regex pattern
     //Takes String for text and String for regex as arguments
     //Returns True or False depending if text has regex pattern

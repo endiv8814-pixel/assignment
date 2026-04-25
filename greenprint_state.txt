@@ -9,3 +9,6 @@ Food|F-001|Food|2026-03-07|Alice|Poultry|100.0
 Food|F-003|Food|2026-03-10|Alice|Vegan|1000.0
 Food|F-004|Food|2026-03-10|Alice|Vegan|1000.0
 Transportation|V-001|Transportation|2026-04-16|Victoria|1.0|Bus
+Food|D-001|Food|2026-04-23|Danil|Beef|1488.0
+Transportation|A-001|Transportation|2026-04-23|Azizkhan|1488.0|Car
+Energy|R-001|Energy|2026-04-23|Romans|1488.0|Wind

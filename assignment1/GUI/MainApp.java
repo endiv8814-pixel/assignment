@@ -35,7 +35,7 @@ public class MainApp extends Application {
     static final Color BRIGHT_GREEN = Color.rgb(57, 255, 20);
     static final Color DIM_GREEN = Color.rgb(30, 100, 30);
     static final Color BORDER_GREEN = Color.rgb(20,  70, 20);
-    static final Color LINE_COLOR = Color.rgb(0, 0, 0, 0.18);
+    static final Color LINE_COLOR = Color.rgb(2, 6, 4, 0.2);
 
     private final FootprintTracker tracker = new FootprintTracker("Lalala");
 
@@ -64,7 +64,7 @@ public class MainApp extends Application {
 
         Scene scene = new Scene(stackRoot, 1200, 800);
         stage.setScene(scene);
-        stage.setTitle("VICTORIAPRINT_V3.0");
+        stage.setTitle("CYPHER");
         stage.setResizable(true);
         stage.setOnCloseRequest(new setOnCloseRequestHandler(tracker));
         stage.show();
