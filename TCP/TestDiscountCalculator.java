@@ -9,27 +9,38 @@ public class TestDiscountCalculator {
     public void testCalculateDiscount() {
         int result = (int) DiscountCalculator.calculateDiscount(100.0, 0);
         assertEquals(100, result, "No discount should return the original price.");
-
-        result = (int) DiscountCalculator.calculateDiscount(200.0, 100);
+    }
+    @Test
+    public void testCalculateDiscount2(){
+        int result = (int) DiscountCalculator.calculateDiscount(200.0, 100);
         assertEquals(0, result, "100% discount should return 0.");
-
-        result = (int) DiscountCalculator.calculateDiscount(200.0, 30);
+    }
+    @Test
+    public void testCalculateDiscount3(){
+        int result = (int) DiscountCalculator.calculateDiscount(200.0, 30);
         assertEquals(140, result, "30% discount should return 140.");
-
-        result = (int) DiscountCalculator.calculateDiscount(200.0, 1);
+    }
+    @Test
+    public void testCalculateDiscount4(){
+        int result = (int) DiscountCalculator.calculateDiscount(200.0, 1);
         assertEquals(198, result, "1% discount should return 198.");
-
-        result = (int) DiscountCalculator.calculateDiscount(200.0, -10);
+    }  
+    @Test
+    public void testCalculateDiscount5(){
+        int result = (int) DiscountCalculator.calculateDiscount(200.0, -10);
         assertEquals(200, result, "Negative discount should return the original price.");
     }
+
     @ParameterizedTest
     @CsvSource({
-    "100, 100",
-    "200, 140",
-    "200, 0"
-    })`
-    void testCalculateDiscount(double initial, int expected) {
-    assertEquals(expected, (int) DiscountCalculator.calculateDiscount());
-    }*/
+    "100, 100, 0",
+    "200, 140, 30",
+    "200, 0, 100",
+    "200, 198, 1",
+    "200, 200, -10"
+    })
+    public void testCalculateDiscount2(double initial, int expected, int percent) {
+    assertEquals(expected, (int) DiscountCalculator.calculateDiscount(initial, percent));
+    }
 
 }
